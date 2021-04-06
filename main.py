@@ -58,13 +58,14 @@ def get_users():
                     subdict['users_list'].append(user)
             return subdict
         return users
+        
     elif request.method == 'POST':
         userToAdd = request.get_json()
         users['users_list'].append(userToAdd)
         resp = jsonify(success=True)
         return resp
 
-
+w
 @app.route('/users/<id>', methods=['GET', 'DELETE'])
 def get_user(id):
     if request.method == 'DELETE':
@@ -73,6 +74,7 @@ def get_user(id):
                 if users['users_list'][i]['id'] == id:
                     del users['users_list'][i]
                     return jsonify(success=True)
+
     if request.method == 'GET':
         if id:
             for user in users['users_list']:
