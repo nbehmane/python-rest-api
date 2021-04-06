@@ -57,7 +57,7 @@ def get_users():
                 if user['name'] == search_username:
                     subdict['users_list'].append(user)
             return subdict
-        return 'FAIL'
+        return users
     elif request.method == 'POST':
         userToAdd = request.get_json()
         users['users_list'].append(userToAdd)
@@ -65,10 +65,17 @@ def get_users():
         return resp
 
 
-@app.route('/users/<id>')
+@app.route('/users/<id>', methods=['GET', 'DELETE'])
 def get_user(id):
-    if id:
-        for user in users['users_list']:
-            if user['id'] == id:
-                return user
+    if request.method == 'DELETE':
+        if id:
+            for i in range(len(users['users_list'])):
+                if users['users_list'][i]['id'] == id:
+                    del users['users_list'][i]
+                    return jsonify(success=True)
+    if request.method == 'GET':
+        if id:
+            for user in users['users_list']:
+                if user['id'] == id:
+                    return user
         return ({})
