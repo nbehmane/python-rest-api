@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
+from flask_cors import CORS
 
 users = { 
    'users_list' :
@@ -35,6 +36,7 @@ users = {
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def hello_world():
@@ -63,7 +65,7 @@ def get_users():
         userToAdd = request.get_json()
         users['users_list'].append(userToAdd)
         resp = jsonify(success=True)
-        return resp
+        return resp, 201
 
 
 @app.route('/users/<id>', methods=['GET', 'DELETE'])
