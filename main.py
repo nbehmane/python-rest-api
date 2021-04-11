@@ -65,7 +65,7 @@ def get_users():
         resp = jsonify(success=True)
         return resp
 
-w
+
 @app.route('/users/<id>', methods=['GET', 'DELETE'])
 def get_user(id):
     if request.method == 'DELETE':
