@@ -70,9 +70,8 @@ def get_users():
         userToAdd = request.get_json()
         userToAdd['id'] = str(makeId())
         users['users_list'].append(userToAdd)
-        resp = jsonify(success=True)
+        resp = jsonify(userToAdd['id'])
         return resp, 201
-
 
 @app.route('/users/<id>', methods=['GET', 'DELETE'])
 def get_user(id):
