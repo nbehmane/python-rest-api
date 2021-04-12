@@ -68,7 +68,7 @@ def get_users():
         
     elif request.method == 'POST':
         userToAdd = request.get_json()
-        userToAdd['id'] = makeId()
+        userToAdd['id'] = str(makeId())
         users['users_list'].append(userToAdd)
         resp = jsonify(success=True)
         return resp, 201
@@ -82,6 +82,8 @@ def get_user(id):
                 if users['users_list'][i]['id'] == id:
                     del users['users_list'][i]
                     return jsonify(success=True)
+                else:
+                    return jsonify(success=False)
 
     if request.method == 'GET':
         if id:
