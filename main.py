@@ -81,8 +81,8 @@ def get_user(id):
             for i in range(len(users['users_list'])):
                 if users['users_list'][i]['id'] == id:
                     del users['users_list'][i]
-                    return jsonify(success=True)
-            return jsonify(success=False)
+                    return jsonify(success=True), 204
+            return jsonify(success=False), 404
 
     if request.method == 'GET':
         if id:
